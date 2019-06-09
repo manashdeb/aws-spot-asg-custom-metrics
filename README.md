@@ -13,4 +13,5 @@ AWS spot fleet gives the opportunity to run such applications at just a fraction
 I've added most of above feature in below CF Template. It's a modified version of AWS provided CF template on spot fleet, which uses auto-scaled spot fleet based on number of messages denoting work-load in the queue.
 
 Didn't find the option to run this spot fllet with scheduled action and this feature does not seem available with spot fleet yet; so may use spot instances instead
+
 https://github.com/awslabs/ec2-spot-labs/blob/master/sqs-ec2-spot-fleet-autoscaling/sqs-ec2-spot-fleet-autoscaling.yaml
