@@ -2,6 +2,13 @@
 
 INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 WORKING_DIR=/root/aws-spot-asg-custom-metrics
+echo "INSTANCE_ID=$INSTANCE_ID" >>/var/log/initial-setup.log
+echo "REGION=$REGION" >>/var/log/initial-setup.log
+echo "S3BUCKET=$S3BUCKET" >>/var/log/initial-setup.log
+echo "SQSQUEUE=$SQSQUEUE" >>/var/log/initial-setup.log
+echo "CLOUDWATCHLOGSGROUP=$CLOUDWATCHLOGSGROUP" >>/var/log/initial-setup.log
+echo "WAITCONDITIONHANDLE=\"$WAITCONDITIONHANDLE\"" >>/var/log/initial-setup.log
+
 
 yum -y --security update
 
