@@ -366,7 +366,7 @@
               "UserData": {
                 "Fn::Base64": {
                  
-				 "Fn::Sub": "#!/bin/bash -xe\nyum -y install git\ncd /root && git clone https://github.com/manashdeb/aws-spot-asg-custom-metrics.git\nREGION=${AWS::Region} S3BUCKET=${s3Bucket} SQSQUEUE=${sqsQueue} CLOUDWATCHLOGSGROUP=${cloudWatchLogsGroup} WAITCONDITIONHANDLE=\"${spotFleetWaitConditionHandle}\" bash /root/ec2-spot-labs/sqs-ec2-spot-fleet-autoscaling/user-data.sh\n"
+				 "Fn::Sub": "#!/bin/bash -xe\nyum -y install git\ncd /root && git clone https://github.com/manashdeb/aws-spot-asg-custom-metrics.git\nREGION=${AWS::Region} S3BUCKET=${s3Bucket} SQSQUEUE=${sqsQueue} CLOUDWATCHLOGSGROUP=${cloudWatchLogsGroup} WAITCONDITIONHANDLE=\"${spotFleetWaitConditionHandle}\" bash /root/aws-spot-asg-custom-metrics/user-data.sh\n"
                 }
               }
             }
@@ -747,6 +747,7 @@
       },
       "Type": "AWS::ApplicationAutoScaling::ScalingPolicy"
     },
+	
     "spotFleetWaitCondition": {
       "DependsOn": "spotFleetWaitConditionHandle",
       "Properties": {
