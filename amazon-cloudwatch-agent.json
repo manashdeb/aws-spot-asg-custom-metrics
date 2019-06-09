@@ -1,0 +1,22 @@
+{
+  "metrics": {
+	"append_dimensions": {
+	  "AutoScalingGroupName": "%AUTOSCALINGGROUPNAME%",
+	  "ImageId": "%IMAGEID%",
+	  "InstanceId": "%INSTANCEID%",
+	  "InstanceType": "%INSTANCETYPE%"
+	},
+	"metrics_collected": {
+	  "mem": {
+		"measurement": [
+		  "mem_used_percent"
+		]
+	  },
+	  "swap": {
+		"measurement": [
+		  "swap_used_percent"
+		]
+	  }
+	}
+  }
+}
