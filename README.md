@@ -10,13 +10,18 @@ AWS spot fleet gives the opportunity to run such applications at just a fraction
 * Use scheduled action to terminate instances during week-end hours
 * Down-size applications after analyzing them using AWS trusted adviser and Cloud-Watch alerts
 
-I've added most of above feature in below CF Template. It's a modified version of AWS provided CF template on spot fleet, which uses auto-scaled spot fleet based on number of messages denoting work-load in the queue. It got a spot fleet spanning across three availability zones configured with different instance types of c5.large and m5a.large, having on demand hourly price of 0.85 and 0.086 respectively in us-east-1 region. I kept the bid price at 0.087 to avoid auto-termination by AWS if spot prices exceeds on-demand price. Current spot price for these instances is 0.033 and 0.034 respectively. As I opted for lowestPrice strategy, creating this stack with single instance picks c5.large charging me only 0.033 per hour. 
-Also, we are collecting cpu, memory, disk metrices through cloudwatch agent, which enables us to adjust the instance size and type appropriately after monitoring the pattern for some time.
+I've added most of above features in this [CloudFormation Template](cfn-sqs-ec2-spot-fleet-autoscaling.json) for a spot fleet, that uses auto-scaled instances based on number of SQS messages in the queue. It's spanning across three availability zones. It's configured with different instance types of c5.large and m5a.large, having on demand hourly price of 0.85 and 0.086 respectively in us-east-1 region. I kept the bid price at 0.087 to avoid auto-termination by AWS if spot prices exceeds on-demand price. Current spot price for these instances is 0.035 and 0.034 respectively. As I opted for lowestPrice strategy, creating this stack with single instance picks m5a.large charging me only 0.033 per hour.
+
+Also, cloudwatch agent is added to this, which collects cpu, memory and disk metrices, enableing us to adjust the instance size and type appropriately after monitoring the pattern for some time.
+
+I've also elaborated it further in below blog:
+
+https://medium.com/@deb.manash/running-highly-available-applications-at-cheapest-cost-on-aws-ec2-spot-fleet-with-auto-scaling-916ded70b7f2
 
 Below is the pictorial representation of this implementation:
 ![cf-template-diagram](cf-template-diagram.png)
 
-Below is memory matrix collected by my single EC2, which denotes I've over provisioned the instance and is candidate for instance resize:
 
-My original CF template was modified using below AWS provided one:
+Please note: My cloud formation template was created referring below AWS provided sample:
+
 https://github.com/awslabs/ec2-spot-labs/blob/master/sqs-ec2-spot-fleet-autoscaling/sqs-ec2-spot-fleet-autoscaling.yaml
