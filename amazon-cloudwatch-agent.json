@@ -1,6 +1,6 @@
   {
       "agent": {
-        "metrics_collection_interval": 300,
+        "metrics_collection_interval": 5,
         "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
       },
       "metrics": {
@@ -15,7 +15,7 @@
               "cpu_usage_guest"
             ],
             "totalcpu": false,
-            "metrics_collection_interval": 300
+            "metrics_collection_interval": 5
           },
           "disk": {
             "resources": [
@@ -30,7 +30,7 @@
              "ignore_file_system_types": [
               "sysfs", "devtmpfs"
             ],
-            "metrics_collection_interval": 300
+            "metrics_collection_interval": 5
           },
           "diskio": {
             "resources": [
@@ -43,7 +43,7 @@
               "write_time",
               "io_time"
             ],
-            "metrics_collection_interval": 300
+            "metrics_collection_interval": 5
           },
           "swap": {
             "measurement": [
@@ -58,7 +58,7 @@
               "mem_cached",
               "mem_total"
             ],
-            "metrics_collection_interval": 300
+            "metrics_collection_interval": 5
           },
           "net": {
             "resources": [
@@ -89,12 +89,12 @@
         },
         "append_dimensions": {
           "ImageId": "${aws:ImageId}",
-          "InstanceId": "%INSTANCE_ID%",
+          "InstanceId": "${aws:InstanceId}",
           "InstanceType": "${aws:InstanceType}",
           "AutoScalingGroupName": "${aws:AutoScalingGroupName}"
         },
         "aggregation_dimensions" : [["ImageId"], ["InstanceId", "InstanceType"], ["d1"],[]],
-        "force_flush_interval" : 300
+        "force_flush_interval" : 30
       },
       "logs": {
         "logs_collected": {
@@ -102,7 +102,7 @@
             "collect_list": [
               {
                 "file_path": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log",
-                "log_group_name": "amazon-cloudwatch-agent.log",
+                "log_group_name": "%CLOUDWATCHLOGSGROUP%",
                 "log_stream_name": "amazon-cloudwatch-agent.log",
                 "timezone": "UTC"
               }
@@ -110,6 +110,6 @@
           }
         },
         "log_stream_name": "cloudwatch-ec2-logstream",
-        "force_flush_interval" : 300
+        "force_flush_interval" : 15
       }
     }
