@@ -41,6 +41,8 @@ cp -av $WORKING_DIR/spot-instance-interruption-notice-handler.sh /usr/local/bin/
 cp -av $WORKING_DIR/convert-worker.sh /usr/local/bin
 
 sed -i "s|%CLOUDWATCHLOGSGROUP%|$CLOUDWATCHLOGSGROUP|g" $WORKING_DIR/amazon-cloudwatch-agent.json
+sed -i "s|%INSTANCE_ID%|$INSTANCE_ID|g" $WORKING_DIR/amazon-cloudwatch-agent.json
+
 cp -av $WORKING_DIR/amazon-cloudwatch-agent.json /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
 cp -av $WORKING_DIR/cfn-hup.conf /etc/cfn/cfn-hup.conf
 cp -av $WORKING_DIR/amazon-cloudwatch-agent-auto-reloader.conf /etc/cfn/hooks.d/amazon-cloudwatch-agent-auto-reloader.conf

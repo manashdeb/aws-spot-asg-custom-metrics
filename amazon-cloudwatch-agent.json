@@ -4,6 +4,7 @@
         "logfile": "/opt/aws/amazon-cloudwatch-agent/logs/amazon-cloudwatch-agent.log"
       },
       "metrics": {
+	    "namespace" : "CWAgent",
         "metrics_collected": {
           "cpu": {
             "resources": [
@@ -88,12 +89,9 @@
           }
         },
         "append_dimensions": {
-          "ImageId": "${aws:ImageId}",
-          "InstanceId": "${aws:InstanceId}",
-          "InstanceType": "${aws:InstanceType}",
-          "AutoScalingGroupName": "${aws:AutoScalingGroupName}"
+          "InstanceId": "%INSTANCE_ID%"
         },
-        "aggregation_dimensions" : [["ImageId"], ["InstanceId", "InstanceType"], ["d1"],[]],
+        "aggregation_dimensions" : [["InstanceId"], ["d1"],[]],
         "force_flush_interval" : 30
       },
       "logs": {
