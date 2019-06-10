@@ -12,9 +12,11 @@ AWS spot fleet gives the opportunity to run such applications at just a fraction
 
 I've added most of above feature in below CF Template. It's a modified version of AWS provided CF template on spot fleet, which uses auto-scaled spot fleet based on number of messages denoting work-load in the queue. It got a spot fleet spanning across three availability zones configured with different instance types of c5.large and m5a.large, having on demand hourly price of 0.85 and 0.086 respectively in us-east-1 region. I kept the bid price at 0.087 to avoid auto-termination by AWS if spot prices exceeds on-demand price. Current spot price for these instances is 0.033 and 0.034 respectively. As I opted for lowestPrice strategy, creating this stack with single instance picks c5.large charging me only 0.033 per hour. 
 Also, we are collecting cpu, memory, disk metrices through cloudwatch agent, which enables us to adjust the instance size and type appropriately after monitoring the pattern for some time.
+
 Below is the pictorial representation of this implementation:
+![cf-template-diagram](cf-template-diagram.png)
 
 Below is memory matrix collected by my single EC2, which denotes I've over provisioned the instance and is candidate for instance resize:
 
-
+My original CF template was modified using below AWS provided one:
 https://github.com/awslabs/ec2-spot-labs/blob/master/sqs-ec2-spot-fleet-autoscaling/sqs-ec2-spot-fleet-autoscaling.yaml
